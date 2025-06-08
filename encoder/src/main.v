@@ -155,13 +155,12 @@ video_timing timing_inst(
     .de(v_de)
 );
 
-wire [23:0] pixel_data;
-wire [18:0] rd_addr;
-assign rd_addr = (py << 9) + (py << 7) + px;
-assign pixel_data = framebuffer[rd_addr];
-wire [7:0] v_r = pixel_data[23:16];
-wire [7:0] v_g = pixel_data[15:8];
-wire [7:0] v_b = pixel_data[7:0];
+// Display a constant red color on every pixel
+// The framebuffer and SD logic remain but are ignored
+// for the final video output.
+wire [7:0] v_r = 8'hFF;
+wire [7:0] v_g = 8'h00;
+wire [7:0] v_b = 8'h00;
 
 // TMDS transmitter
 wire tmds_clk_p, tmds_clk_n;

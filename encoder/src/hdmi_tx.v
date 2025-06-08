@@ -79,7 +79,6 @@ module hdmi_tx (
     wire [2:0] tmds_data_p;
     wire [2:0] tmds_data_n;
 
-
     genvar i;
     generate
         for (i = 0; i < 3; i = i + 1) begin : ser
