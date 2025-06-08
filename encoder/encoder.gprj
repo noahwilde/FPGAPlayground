@@ -8,6 +8,10 @@
         <File path="src/debounce.v" type="file.verilog" enable="1"/>
         <File path="src/driver_DigitalTube.v" type="file.verilog" enable="1"/>
         <File path="src/main.v" type="file.verilog" enable="1"/>
+        <File path="src/dvi_pmod.v" type="file.verilog" enable="1"/>
+        <File path="src/hdmi_tx.v" type="file.verilog" enable="1"/>
+        <File path="src/pattern_gen.v" type="file.verilog" enable="1"/>
+        <File path="src/gowin_pll_50m_250m.v" type="file.verilog" enable="1"/>
         <File path="src/sd_file_reader.v" type="file.verilog" enable="1"/>
         <File path="src/sd_reader.v" type="file.verilog" enable="1"/>
         <File path="src/sdcmd_ctrl.v" type="file.verilog" enable="1"/>
