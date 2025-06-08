@@ -16,9 +16,13 @@ module hdmi_tx (
     input        vsync,
     input        de,
     output       tmds_clk_p,
+    output       tmds_clk_n,
     output       tmds_red_p,
+    output       tmds_red_n,
     output       tmds_green_p,
-    output       tmds_blue_p
+    output       tmds_green_n,
+    output       tmds_blue_p,
+    output       tmds_blue_n
 );
 
     // TMDS encoding function (from simplified encoder in dvi_pmod)
@@ -72,13 +76,15 @@ module hdmi_tx (
     assign tmds_bus[1] = tmds_green;
     assign tmds_bus[2] = tmds_blue;
 
-    wire [2:0] tmds_data;
+    wire [2:0] tmds_data_p;
+    wire [2:0] tmds_data_n;
+
 
     genvar i;
     generate
         for (i = 0; i < 3; i = i + 1) begin : ser
-            OSER10 gwSer (
-                .Q   (tmds_data[i]),
+            OSER10 gwSerP (
+                .Q   (tmds_data_p[i]),
                 .D0  (tmds_bus[i][0]),
                 .D1  (tmds_bus[i][1]),
                 .D2  (tmds_bus[i][2]),
@@ -93,12 +99,33 @@ module hdmi_tx (
                 .FCLK(tmds_clk),
                 .RESET(rst)
             );
+            OSER10 gwSerN (
+                .Q   (tmds_data_n[i]),
+                .D0  (~tmds_bus[i][0]),
+                .D1  (~tmds_bus[i][1]),
+                .D2  (~tmds_bus[i][2]),
+                .D3  (~tmds_bus[i][3]),
+                .D4  (~tmds_bus[i][4]),
+                .D5  (~tmds_bus[i][5]),
+                .D6  (~tmds_bus[i][6]),
+                .D7  (~tmds_bus[i][7]),
+                .D8  (~tmds_bus[i][8]),
+                .D9  (~tmds_bus[i][9]),
+                .PCLK(pix_clk),
+                .FCLK(tmds_clk),
+                .RESET(rst)
+            );
         end
     endgenerate
 
-    assign tmds_red_p   = tmds_data[0];
-    assign tmds_green_p = tmds_data[1];
-    assign tmds_blue_p  = tmds_data[2];
+    assign tmds_red_p   = tmds_data_p[0];
+    assign tmds_red_n   = tmds_data_n[0];
+    assign tmds_green_p = tmds_data_p[1];
+    assign tmds_green_n = tmds_data_n[1];
+    assign tmds_blue_p  = tmds_data_p[2];
+    assign tmds_blue_n  = tmds_data_n[2];
     assign tmds_clk_p   = pix_clk;
+    assign tmds_clk_n   = ~pix_clk;
+
 
 endmodule
