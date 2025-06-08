@@ -126,4 +126,5 @@ module hdmi_tx (
     assign tmds_clk_p   = pix_clk;
     assign tmds_clk_n   = ~pix_clk;
 
+
 endmodule
