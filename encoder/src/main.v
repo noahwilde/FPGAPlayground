@@ -108,15 +108,60 @@ always @(posedge clk) begin
     end
 end
 
-// Status LEDs on PMOD0
-assign pmod_io[0] = ~card_stat[0];
-assign pmod_io[1] = ~card_stat[1];
-assign pmod_io[2] = ~card_stat[2];
-assign pmod_io[3] = ~card_stat[3];
-assign pmod_io[4] = ~card_type[0];
-assign pmod_io[5] = ~card_type[1];
-assign pmod_io[6] = ~filesystem_type[0];
-assign pmod_io[7] = ~filesystem_type[1];
+// Generate 25 MHz pixel clock from the 50 MHz input
+reg pix_clk = 0;
+always @(posedge clk) pix_clk <= ~pix_clk;
+
+// PLL to create the 250 MHz TMDS bit clock
+wire tmds_clk;
+wire pll_lock;
+gowin_pll_50m_250m pll_video(
+    .clkout(tmds_clk),
+    .lock(pll_lock),
+    .clkin(clk)
+);
+
+// Simple pattern generator
+wire       v_hsync, v_vsync, v_de;
+wire [7:0] v_r, v_g, v_b;
+pattern_gen pat(
+    .clk(pix_clk),
+    .rst(key_clean),
+    .hsync(v_hsync),
+    .vsync(v_vsync),
+    .de(v_de),
+    .red(v_r),
+    .green(v_g),
+    .blue(v_b)
+);
+
+// TMDS transmitter
+wire tmds_clk_p, tmds_red_p, tmds_green_p, tmds_blue_p;
+hdmi_tx tx(
+    .pix_clk(pix_clk),
+    .tmds_clk(tmds_clk),
+    .rst(key_clean),
+    .red(v_r),
+    .green(v_g),
+    .blue(v_b),
+    .hsync(v_hsync),
+    .vsync(v_vsync),
+    .de(v_de),
+    .tmds_clk_p(tmds_clk_p),
+    .tmds_red_p(tmds_red_p),
+    .tmds_green_p(tmds_green_p),
+    .tmds_blue_p(tmds_blue_p)
+);
+
+// Map TMDS outputs to PMOD pins (single-ended)
+assign pmod_io[0] = tmds_clk_p;
+assign pmod_io[1] = ~tmds_clk_p;
+assign pmod_io[2] = tmds_red_p;
+assign pmod_io[3] = ~tmds_red_p;
+assign pmod_io[4] = tmds_green_p;
+assign pmod_io[5] = ~tmds_green_p;
+assign pmod_io[6] = tmds_blue_p;
+assign pmod_io[7] = ~tmds_blue_p;
 
 // LED indicators
 assign led_done  = file_found;
