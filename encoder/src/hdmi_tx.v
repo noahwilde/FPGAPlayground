@@ -16,9 +16,13 @@ module hdmi_tx (
     input        vsync,
     input        de,
     output       tmds_clk_p,
+    output       tmds_clk_n,
     output       tmds_red_p,
+    output       tmds_red_n,
     output       tmds_green_p,
-    output       tmds_blue_p
+    output       tmds_green_n,
+    output       tmds_blue_p,
+    output       tmds_blue_n
 );
 
     // TMDS encoding function (from simplified encoder in dvi_pmod)
@@ -58,48 +62,68 @@ module hdmi_tx (
         end
     endfunction
 
-    reg [9:0] tmds_red, tmds_green, tmds_blue, tmds_clock;
+    reg [9:0] tmds_red, tmds_green, tmds_blue;
 
     always @(posedge pix_clk) begin
         tmds_red   <= tmds_encode(red, 0, 0, de);
         tmds_green <= tmds_encode(green, 0, 0, de);
         tmds_blue  <= tmds_encode(blue, hsync, vsync, de);
-        tmds_clock <= 10'b0000011111; // clock pattern
     end
 
-    reg [9:0] shift_red   = 0;
-    reg [9:0] shift_green = 0;
-    reg [9:0] shift_blue  = 0;
-    reg [9:0] shift_clock = 0;
-    reg [3:0] shift_cnt   = 0;
+    // Serialize the 10-bit TMDS words using the Gowin OSER10 primitives.
+    wire [9:0] tmds_bus [2:0];
+    assign tmds_bus[0] = tmds_red;
+    assign tmds_bus[1] = tmds_green;
+    assign tmds_bus[2] = tmds_blue;
 
-    always @(posedge tmds_clk or posedge rst) begin
-        if (rst) begin
-            shift_cnt   <= 0;
-            shift_red   <= 0;
-            shift_green <= 0;
-            shift_blue  <= 0;
-            shift_clock <= 0;
-        end else begin
-            if (shift_cnt == 0) begin
-                shift_cnt   <= 9;
-                shift_red   <= tmds_red;
-                shift_green <= tmds_green;
-                shift_blue  <= tmds_blue;
-                shift_clock <= tmds_clock;
-            end else begin
-                shift_cnt   <= shift_cnt - 1;
-                shift_red   <= {1'b0, shift_red[9:1]};
-                shift_green <= {1'b0, shift_green[9:1]};
-                shift_blue  <= {1'b0, shift_blue[9:1]};
-                shift_clock <= {1'b0, shift_clock[9:1]};
-            end
+    wire [2:0] tmds_data_p;
+    wire [2:0] tmds_data_n;
+
+    genvar i;
+    generate
+        for (i = 0; i < 3; i = i + 1) begin : ser
+            OSER10 gwSerP (
+                .Q   (tmds_data_p[i]),
+                .D0  (tmds_bus[i][0]),
+                .D1  (tmds_bus[i][1]),
+                .D2  (tmds_bus[i][2]),
+                .D3  (tmds_bus[i][3]),
+                .D4  (tmds_bus[i][4]),
+                .D5  (tmds_bus[i][5]),
+                .D6  (tmds_bus[i][6]),
+                .D7  (tmds_bus[i][7]),
+                .D8  (tmds_bus[i][8]),
+                .D9  (tmds_bus[i][9]),
+                .PCLK(pix_clk),
+                .FCLK(tmds_clk),
+                .RESET(rst)
+            );
+            OSER10 gwSerN (
+                .Q   (tmds_data_n[i]),
+                .D0  (~tmds_bus[i][0]),
+                .D1  (~tmds_bus[i][1]),
+                .D2  (~tmds_bus[i][2]),
+                .D3  (~tmds_bus[i][3]),
+                .D4  (~tmds_bus[i][4]),
+                .D5  (~tmds_bus[i][5]),
+                .D6  (~tmds_bus[i][6]),
+                .D7  (~tmds_bus[i][7]),
+                .D8  (~tmds_bus[i][8]),
+                .D9  (~tmds_bus[i][9]),
+                .PCLK(pix_clk),
+                .FCLK(tmds_clk),
+                .RESET(rst)
+            );
         end
-    end
+    endgenerate
 
-    assign tmds_red_p   = shift_red[0];
-    assign tmds_green_p = shift_green[0];
-    assign tmds_blue_p  = shift_blue[0];
-    assign tmds_clk_p   = shift_clock[0];
+    assign tmds_red_p   = tmds_data_p[0];
+    assign tmds_red_n   = tmds_data_n[0];
+    assign tmds_green_p = tmds_data_p[1];
+    assign tmds_green_n = tmds_data_n[1];
+    assign tmds_blue_p  = tmds_data_p[2];
+    assign tmds_blue_n  = tmds_data_n[2];
+    assign tmds_clk_p   = pix_clk;
+    assign tmds_clk_n   = ~pix_clk;
 
 endmodule
