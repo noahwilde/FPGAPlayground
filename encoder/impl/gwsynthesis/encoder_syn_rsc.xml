@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module name="top" Register="40" Alu="17" Lut="37" Bsram="1" T_Register="1190(40)" T_Alu="542(17)" T_Lut="2117(37)" T_MULTALU27X18="2(0)" T_MULT12X12="1(0)" T_MULT27X36="4(0)" T_Bsram="1(1)">
+ <SubModule name="db" Register="18" Alu="15" Lut="7" T_Register="18(18)" T_Alu="15(15)" T_Lut="7(7)"/>
+ <SubModule name="db2" Register="18" Alu="15" Lut="7" T_Register="18(18)" T_Alu="15(15)" T_Lut="7(7)"/>
+ <SubModule name="sd_inst" Register="779" Alu="480" Lut="1508" MULTALU27X18="2" MULT12X12="1" MULT27X36="4" T_Register="1087(779)" T_Alu="495(480)" T_Lut="1994(1508)" T_MULTALU27X18="2(2)" T_MULT12X12="1(1)" T_MULT27X36="4(4)">
+  <SubModule name="u_sd_reader" Register="158" Lut="303" T_Register="308(158)" T_Alu="15(0)" T_Lut="486(303)">
+   <SubModule name="u_sdcmd_ctrl" Register="150" Alu="15" Lut="183" T_Register="150(150)" T_Alu="15(15)" T_Lut="183(183)"/>
+  </SubModule>
+ </SubModule>
+ <SubModule name="display_driver" Register="27" Lut="72" T_Register="27(27)" T_Lut="72(72)"/>
+</Module>

@@ -1,0 +1,37 @@
+{
+ "Device" : "GW5A-25A",
+ "Files" : [
+  {
+   "Path" : "C:/Users/nwild/OneDrive/Documents/encoder/src/debounce.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/nwild/OneDrive/Documents/encoder/src/driver_DigitalTube.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/nwild/OneDrive/Documents/encoder/src/main.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/nwild/OneDrive/Documents/encoder/src/sd_file_reader.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/nwild/OneDrive/Documents/encoder/src/sd_reader.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "C:/Users/nwild/OneDrive/Documents/encoder/src/sdcmd_ctrl.v",
+   "Type" : "verilog"
+  }
+ ],
+ "IncludePath" : [
+
+ ],
+ "LoopLimit" : 2000,
+ "ResultFile" : "C:/Users/nwild/OneDrive/Documents/encoder/impl/temp/rtl_parser.result",
+ "Top" : "top",
+ "VerilogStd" : "verilog_2001",
+ "VhdlStd" : "vhdl_93"
+}

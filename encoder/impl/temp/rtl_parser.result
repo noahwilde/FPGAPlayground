@@ -1,0 +1,64 @@
+[
+ {
+  "InstFile" : "C:/Users/nwild/OneDrive/Documents/encoder/src/main.v",
+  "InstLine" : 1,
+  "InstName" : "top",
+  "ModuleFile" : "C:/Users/nwild/OneDrive/Documents/encoder/src/main.v",
+  "ModuleLine" : 1,
+  "ModuleName" : "top",
+  "SubInsts" : [
+   {
+    "InstFile" : "C:/Users/nwild/OneDrive/Documents/encoder/src/main.v",
+    "InstLine" : 28,
+    "InstName" : "db",
+    "ModuleFile" : "C:/Users/nwild/OneDrive/Documents/encoder/src/debounce.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "debounce"
+   },
+   {
+    "InstFile" : "C:/Users/nwild/OneDrive/Documents/encoder/src/main.v",
+    "InstLine" : 32,
+    "InstName" : "db2",
+    "ModuleFile" : "C:/Users/nwild/OneDrive/Documents/encoder/src/debounce.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "debounce"
+   },
+   {
+    "InstFile" : "C:/Users/nwild/OneDrive/Documents/encoder/src/main.v",
+    "InstLine" : 52,
+    "InstName" : "sd_inst",
+    "ModuleFile" : "C:/Users/nwild/OneDrive/Documents/encoder/src/sd_file_reader.v",
+    "ModuleLine" : 12,
+    "ModuleName" : "sd_file_reader",
+    "SubInsts" : [
+     {
+      "InstFile" : "C:/Users/nwild/OneDrive/Documents/encoder/src/sd_file_reader.v",
+      "InstLine" : 362,
+      "InstName" : "u_sd_reader",
+      "ModuleFile" : "C:/Users/nwild/OneDrive/Documents/encoder/src/sd_reader.v",
+      "ModuleLine" : 10,
+      "ModuleName" : "sd_reader",
+      "SubInsts" : [
+       {
+        "InstFile" : "C:/Users/nwild/OneDrive/Documents/encoder/src/sd_reader.v",
+        "InstLine" : 100,
+        "InstName" : "u_sdcmd_ctrl",
+        "ModuleFile" : "C:/Users/nwild/OneDrive/Documents/encoder/src/sdcmd_ctrl.v",
+        "ModuleLine" : 10,
+        "ModuleName" : "sdcmd_ctrl"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "InstFile" : "C:/Users/nwild/OneDrive/Documents/encoder/src/main.v",
+    "InstLine" : 125,
+    "InstName" : "display_driver",
+    "ModuleFile" : "C:/Users/nwild/OneDrive/Documents/encoder/src/driver_DigitalTube.v",
+    "ModuleLine" : 1,
+    "ModuleName" : "driver_DigitalTubeHexHex"
+   }
+  ]
+ }
+]

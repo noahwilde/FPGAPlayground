@@ -1,0 +1,71 @@
+// Left Extension Port
+IO_LOC "pmod_io[0]"  J5;
+IO_LOC "pmod_io[1]"  H5;
+IO_LOC "pmod_io[2]"  H7;
+IO_LOC "pmod_io[3]"  H8;
+IO_LOC "pmod_io[4]"  G8;
+IO_LOC "pmod_io[5]"  G7;
+IO_LOC "pmod_io[6]"  G5;
+IO_LOC "pmod_io[7]"  F5;
+
+IO_LOC "o_sel" K5;
+IO_PORT "o_sel" PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "o_digitalTube[6]" L11;
+IO_PORT "o_digitalTube[6]" PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "o_digitalTube[5]" K11;
+IO_PORT "o_digitalTube[5]" PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "o_digitalTube[4]" L5;
+IO_PORT "o_digitalTube[4]" PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "o_digitalTube[3]" E10;
+IO_PORT "o_digitalTube[3]" PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "o_digitalTube[2]" E11;
+IO_PORT "o_digitalTube[2]" PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "o_digitalTube[1]" A11;
+IO_PORT "o_digitalTube[1]" PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "o_digitalTube[0]" A10;
+IO_PORT "o_digitalTube[0]" PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+
+
+// SDCard
+IO_LOC "sdclk" C11;
+IO_PORT "sdclk" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=12 BANK_VCCIO=3.3;
+IO_LOC "sdcmd" D11;        // MOSI
+IO_PORT "sdcmd" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=12 BANK_VCCIO=3.3;
+IO_LOC "sddat0" B11;       // MISO
+IO_PORT "sddat0" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=OFF BANK_VCCIO=3.3;
+
+IO_LOC "sddat1" G10;
+IO_PORT "sddat1" PULL_MODE=UP IO_TYPE=LVCMOS33;
+IO_LOC "sddat2" D10;
+IO_PORT "sddat2" PULL_MODE=UP IO_TYPE=LVCMOS33;
+IO_LOC "sddat3" G11;
+IO_PORT "sddat3" PULL_MODE=UP IO_TYPE=LVCMOS33;
+
+
+
+IO_PORT "pmod_io[0]" PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_PORT "pmod_io[1]" PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_PORT "pmod_io[2]" PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_PORT "pmod_io[3]" PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_PORT "pmod_io[4]" PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_PORT "pmod_io[5]" PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_PORT "pmod_io[6]" PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_PORT "pmod_io[7]" PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+
+
+
+// clock
+IO_LOC "clk" E2;
+IO_PORT "clk" PULL_MODE=NONE DRIVE=OFF BANK_VCCIO=3.3;
+
+// Key (pushbutton)
+IO_LOC "key" H11;  
+IO_PORT "key" PULL_MODE=DOWN DRIVE=OFF BANK_VCCIO=3.3; // Key has a pulldown
+
+// Second button on pin H10
+IO_LOC "key2" H10;
+IO_PORT "key2" PULL_MODE=DOWN DRIVE=OFF BANK_VCCIO=3.3; // Key has a pulldown
+
+// Onboard LED's
+IO_LOC "led_done" D7;
+IO_LOC "led_ready" E8;

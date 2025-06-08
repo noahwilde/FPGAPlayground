@@ -1,0 +1,39 @@
+GowinSynthesis start
+Running parser ...
+Analyzing Verilog file 'C:\Users\nwild\OneDrive\Documents\encoder\src\debounce.v'
+Analyzing Verilog file 'C:\Users\nwild\OneDrive\Documents\encoder\src\driver_DigitalTube.v'
+Analyzing Verilog file 'C:\Users\nwild\OneDrive\Documents\encoder\src\main.v'
+Analyzing Verilog file 'C:\Users\nwild\OneDrive\Documents\encoder\src\sd_file_reader.v'
+Analyzing Verilog file 'C:\Users\nwild\OneDrive\Documents\encoder\src\sd_reader.v'
+Analyzing Verilog file 'C:\Users\nwild\OneDrive\Documents\encoder\src\sdcmd_ctrl.v'
+Compiling module 'top'("C:\Users\nwild\OneDrive\Documents\encoder\src\main.v":1)
+Extracting RAM for identifier 'byte_buffer'("C:\Users\nwild\OneDrive\Documents\encoder\src\main.v":71)
+Compiling module 'debounce'("C:\Users\nwild\OneDrive\Documents\encoder\src\debounce.v":1)
+WARN  (EX3791) : Expression size 17 truncated to fit in target size 16("C:\Users\nwild\OneDrive\Documents\encoder\src\debounce.v":14)
+Compiling module 'sd_file_reader'("C:\Users\nwild\OneDrive\Documents\encoder\src\sd_file_reader.v":12)
+Compiling module 'sd_reader(CLK_DIV=3'b010)'("C:\Users\nwild\OneDrive\Documents\encoder\src\sd_reader.v":10)
+Compiling module 'sdcmd_ctrl'("C:\Users\nwild\OneDrive\Documents\encoder\src\sdcmd_ctrl.v":10)
+WARN  (EX3791) : Expression size 10 truncated to fit in target size 9("C:\Users\nwild\OneDrive\Documents\encoder\src\main.v":82)
+WARN  (EX3791) : Expression size 10 truncated to fit in target size 9("C:\Users\nwild\OneDrive\Documents\encoder\src\main.v":98)
+Compiling module 'driver_DigitalTubeHexHex'("C:\Users\nwild\OneDrive\Documents\encoder\src\driver_DigitalTube.v":1)
+WARN  (EX3791) : Expression size 25 truncated to fit in target size 24("C:\Users\nwild\OneDrive\Documents\encoder\src\driver_DigitalTube.v":51)
+NOTE  (EX0101) : Current top module is "top"
+[5%] Running netlist conversion ...
+Running device independent optimization ...
+[10%] Optimizing Phase 0 completed
+[15%] Optimizing Phase 1 completed
+[25%] Optimizing Phase 2 completed
+Running inference ...
+[30%] Inferring Phase 0 completed
+[40%] Inferring Phase 1 completed
+[50%] Inferring Phase 2 completed
+[55%] Inferring Phase 3 completed
+Running technical mapping ...
+[60%] Tech-Mapping Phase 0 completed
+[65%] Tech-Mapping Phase 1 completed
+[75%] Tech-Mapping Phase 2 completed
+[80%] Tech-Mapping Phase 3 completed
+[90%] Tech-Mapping Phase 4 completed
+[95%] Generate netlist file "C:\Users\nwild\OneDrive\Documents\encoder\impl\gwsynthesis\encoder.vg" completed
+[100%] Generate report file "C:\Users\nwild\OneDrive\Documents\encoder\impl\gwsynthesis\encoder_syn.rpt.html" completed
+GowinSynthesis finish
