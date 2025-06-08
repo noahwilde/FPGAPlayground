@@ -164,7 +164,10 @@ wire [7:0] v_g = pixel_data[15:8];
 wire [7:0] v_b = pixel_data[7:0];
 
 // TMDS transmitter
-wire tmds_clk_p, tmds_red_p, tmds_green_p, tmds_blue_p;
+wire tmds_clk_p, tmds_clk_n;
+wire tmds_red_p, tmds_red_n;
+wire tmds_green_p, tmds_green_n;
+wire tmds_blue_p, tmds_blue_n;
 hdmi_tx tx(
     .pix_clk(pix_clk),
     .tmds_clk(tmds_clk),
@@ -176,20 +179,24 @@ hdmi_tx tx(
     .vsync(v_vsync),
     .de(v_de),
     .tmds_clk_p(tmds_clk_p),
+    .tmds_clk_n(tmds_clk_n),
     .tmds_red_p(tmds_red_p),
+    .tmds_red_n(tmds_red_n),
     .tmds_green_p(tmds_green_p),
-    .tmds_blue_p(tmds_blue_p)
+    .tmds_green_n(tmds_green_n),
+    .tmds_blue_p(tmds_blue_p),
+    .tmds_blue_n(tmds_blue_n)
 );
 
-// Map TMDS outputs to PMOD pins (single-ended)
+// Map TMDS outputs to PMOD pins
 assign pmod_io[0] = tmds_clk_p;
-assign pmod_io[1] = ~tmds_clk_p;
+assign pmod_io[1] = tmds_clk_n;
 assign pmod_io[2] = tmds_red_p;
-assign pmod_io[3] = ~tmds_red_p;
+assign pmod_io[3] = tmds_red_n;
 assign pmod_io[4] = tmds_green_p;
-assign pmod_io[5] = ~tmds_green_p;
+assign pmod_io[5] = tmds_green_n;
 assign pmod_io[6] = tmds_blue_p;
-assign pmod_io[7] = ~tmds_blue_p;
+assign pmod_io[7] = tmds_blue_n;
 
 // LED indicators
 assign led_done  = file_found;
